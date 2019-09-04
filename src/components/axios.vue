@@ -6,7 +6,10 @@
 </template>
 
 <script>
+import xhr from '../../config/axios.config' // axios的配置文件
 import axios from 'axios'
+
+let source = axios.CancelToken.source()
 
 export default {
   name: 'HelloWorld',
@@ -29,7 +32,7 @@ export default {
         }
       }) */
 
-    axios({
+    /* axios({
       method: 'post',
       url: 'https://easy-mock.com/mock/5d6f61f957a3b74a8c350aad/example/post_person',
       data: {
@@ -41,7 +44,7 @@ export default {
           console.log(response.data)
           this.obj = response.data.data
         }
-      })
+      }) */
 
     // 第二种方式
     /* axios({
@@ -61,6 +64,32 @@ export default {
         console.log(error
         )
       }) */
+
+    xhr({
+      method: 'post',
+      url: 'post_person',
+      data: {
+        sex: 'male'
+      },
+      params: {
+        statusText: 'no'
+      }
+    })
+      .then((re) => {
+        if (re.status === 200) {
+          console.log(re)
+          this.obj = re.data.data
+        }
+      })
+      .catch((error) => {
+        if (axios.isCancel(error)) {
+          console.log(error.message)
+        } else {
+          console.log(error)
+        }
+      })
+
+    source.cancel('请求被用户取消了')
   }
 }
 </script>
