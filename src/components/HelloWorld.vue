@@ -17,7 +17,11 @@ export default {
   },
   created () {
     // 第一种方式
-    /* axios.get('https://easy-mock.com/mock/5d6f61f957a3b74a8c350aad/example/get_person')
+    /* axios.get('https://easy-mock.com/mock/5d6f61f957a3b74a8c350aad/example/get_person', {
+      params: {
+        name: 'lijunjian'
+      }
+    })
       .then((rs) => {
         if (rs.status === 200) {
           console.dir(rs)
@@ -25,10 +29,27 @@ export default {
         }
       }) */
 
-    // 第二种方式
     axios({
       method: 'post',
-      url: 'https://easy-mock.com/mock/5d6f61f957a3b74a8c350aad/example/post_person'
+      url: 'https://easy-mock.com/mock/5d6f61f957a3b74a8c350aad/example/post_person',
+      data: {
+        name: 'lijunjian'
+      }
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          console.log(response.data)
+          this.obj = response.data.data
+        }
+      })
+
+    // 第二种方式
+    /* axios({
+      method: 'get',
+      url: 'https://easy-mock.com/mock/5d6f61f957a3b74a8c350aad/example/post_person',
+      parmas: {
+        ss: 'lijunjian'
+      }
     })
       .then((response) => {
         if (response.status === 200) {
@@ -37,8 +58,9 @@ export default {
         }
       })
       .catch((error) => {
-        console.log(error)
-      })
+        console.log(error
+        )
+      }) */
   }
 }
 </script>
