@@ -1,3 +1,24 @@
+## 按需加载组建的方法
+> 第一种
+``` bash
+let App = () => import('@/components/App.vue')
+```
+> 第二种
+```bash
+let App = resolve => require.ensure([], ()=> resolve(require('@/components/App')),'chunkName')
+```
+> 第三种
+```bash
+let router = new Router({
+    routes: [
+        {
+            path: '/app',
+            name: 'App',
+            component: resolve => require(['@/components/App'],resole)
+        }
+    ]
+})
+```
 # vue
 
 > A Vue.js project
